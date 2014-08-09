@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<style>
+
+	table, caption, tbody, tfoot, thead, tr, th, td {
+		margin:0;
+		padding:0;
+		border:0;
+		outline:0;
+		font-size:100%;
+		vertical-align:baseline;
+		background:transparent;
+	}
+	
+	body {
+		margin:0;
+		padding:0;
+		font:12px/15px "Helvetica Neue",Arial, Helvetica, sans-serif;
+		color: #555;
+	}
+	
+	a {color:#666;}
+	
+	table {
+		overflow:hidden;
+		border:1px solid #d3d3d3;
+		background:#fefefe;
+		width:95%;
+		margin:1% ;
+		-moz-border-radius:5px; /* FF1+ */
+		-webkit-border-radius:5px; /* Saf3-4 */
+		border-radius:5px;
+		-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+		-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+	}
+	
+	th, td {padding:8px 8px 8px; text-align:center; }
+	
+	th {padding-top:22px; text-shadow: 1px 1px 1px #fff; background:#e8eaeb;}
+	
+	td {border-top:1px solid #e0e0e0; border-right:1px solid #e0e0e0;}
+	
+	tr.odd-row td {background:#f6f6f6;}
+	
+	td.first, th.first {text-align:left}
+	
+	td.last {border-right:none;}
+	
+	/*
+	Background gradients are completely unnessary but a neat effect.
+	*/
+	
+	td {
+		background: -moz-linear-gradient(100% 25% 90deg, #fefefe, #f9f9f9);
+		background: -webkit-gradient(linear, 0% 0%, 0% 25%, from(#f9f9f9), to(#fefefe));
+	}
+	
+	tr.odd-row td {
+		background: -moz-linear-gradient(100% 25% 90deg, #f6f6f6, #f1f1f1);
+		background: -webkit-gradient(linear, 0% 0%, 0% 25%, from(#f1f1f1), to(#f6f6f6));
+	}
+	
+	th {
+		background: -moz-linear-gradient(100% 20% 90deg, #e8eaeb, #ededed);
+		background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(#ededed), to(#e8eaeb));
+	}
+
+</style>
+<body>
+<table>
+<tr>
+  <th>Код</th>
+  <th>В коде</th>
+  <th>Описание</th>
+  <th>Параметры(принимает)</th>
+  <th>Успех - Возвращает:</th>  
+</tr>
+<tr>
+  <td >1</td>  <td >GetCard</td>  <td >Возвращает тестовую карту</td>
+  <td >-</td>
+  <td >{"type": "cardReceived","card": &lt;dict данные о карте&gt;}</td>
+</tr>
+
+<tr>
+  <td >10</td>  <td>GetListOfRoom</td>  <td >Запрашивает список созданных комнат</td>
+  <td >-</td>
+  <td >11</td>
+</tr>
+
+<tr>
+  <td >11</td>  <td>ListOfRooms</td>  <td >Содержит список игровых комнат</td>
+  <td >-</td>
+  <td >rooms - массив игровых комнат</td>
+</tr>
+
+<tr>
+  <td >20</td>  <td>CreateRoom</td>  <td >Создает комнату</td>
+  <td >"name" - желаемое имя для комнаты</td>
+  <td >21</td>
+</tr>
+
+<tr>
+  <td >21</td>  <td>RoomCreated</td>  <td >-</td>
+  <td >-</td>
+  <td >"id" - уникальный идентификатор созданной комнаты</td>
+</tr>
+
+<tr>
+  <td >30</td>  <td>ConnectToRoom</td>  <td >Присоеденяется к созданной комнате</td>
+  <td >"id" - id комнаты для присоеденения</td>
+  <td >31</td>
+</tr>
+
+<tr>
+  <td >31</td>  <td>ConnectedToRoom</td>  <td >Сообщает о успешном подключении к комнате</td>
+  <td >-</td>
+  <td >"roomInfo" - информация о комнате</td>
+</tr>
+
+<tr>
+  <td >32</td>  <td>PlayerConnected</td>  <td >Оповещает создателя комнаты о подключении другого игрока</td>
+  <td >-</td>
+  <td >"playerInfo" - &lt;dict данные о игроке&gt;</td>
+</tr>
+
+<tr>
+  <td >33</td>  <td>LeaveRoom</td>  <td >Выход игрока из комнаты. Если игрок создатель комнаты - разрушает
+    ее</td>
+  <td >-</td>
+  <td >-</td>
+</tr>
+
+<tr>
+  <td >40</td>  <td>DestroyRoom</td>  <td >Если игрок является создателем комнаты, то сообщение разрушает ее.</td>
+  <td >-</td>
+  <td >1000</td>
+</tr>
+
+<tr>
+  <td >41</td>  <td>RoomDestroyed</td>  <td >Оповещает игрока об успешном удалении комнаты</td>
+  <td >-</td>
+  <td >-</td>
+</tr>
+
+<tr>
+  <td >50</td>  <td>PlayerDisconnected</td>  <td >Оповещает игрока о том что второй игрок отключился от комнаты</td>
+  <td >-</td>
+  <td >-</td>
+</tr>
+
+<tr>
+  <td >60</td>  <td>ChatMessage</td>  <td >Отправляет сообщение ВСЕМ игрокам в комнате.</td>
+  <td >"message" сообщение для рассылки</td>
+  <td > 60. "playerName" имя игрока отправившего сообщение, "message" сообщение от игрока</td>
+</tr>
+
+<tr>
+  <td >200</td>  <td>SetName</td>  <td >Устанавливает имя игрока</td>
+  <td >"name" имя игрока</td>
+  <td ></td>
+</tr>
+
+<tr>
+  <td ></td>  <td></td>  <td ></td>
+  <td ></td>
+  <td ></td>
+</tr>
+
+<tr>
+  <td colspan="5"></td>
+
+</tr>
+<tr>
+  <td >1000</td>  <td>SUCCESS</td>  <td >Возвращается в случае успеха</td>
+  <td >-</td>
+  <td >-</td>
+</tr>
+
+<tr>
+  <td >1010</td>  <td>CriticalError</td>  <td >Например: не правильно форматированный json в сообщении.</td>
+  <td >-</td>
+  <td >  description - содержит описание ошибки.
+  message - содержит сообщение которое вызвало ошибку
+	</td>
+</tr>
+
+<tr>
+  <td >1020</td>  <td>Error</td>  <td >Неудача при выполнении или невозможность выполнения операции. Например: попытка подключения в заполненую комнату.</td>
+  <td >-</td>
+  <td>
+  description - содержит описание ошибки.
+  message - содержит сообщение которое вызвало ошибку(опционально)
+  </td>
+</tr>
+
+</table>
+</body>
+</html>
+<!--
+<tr><td rowspan="2">Row 1 Cell 1</td>
+<td>Row 1 Cell 2</td><td>Row 1 Cell 3</td></tr>
+<tr><td>Row 2 Cell 2</td><td>Row 2 Cell 3</td></tr>
+<tr><td colspan="3">Row 3 Cell 1</td></tr>
+-->

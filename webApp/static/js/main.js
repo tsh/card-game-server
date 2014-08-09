@@ -1,0 +1,1 @@
+multiplayer.init("ws://"+ location.host + "/ws");

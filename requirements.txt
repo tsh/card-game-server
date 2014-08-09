@@ -1,0 +1,5 @@
+backports.ssl-match-hostname==3.4.0.2
+certifi==14.05.14
+six==1.7.3
+tornado==4.0
+websocket-client==0.16.0
