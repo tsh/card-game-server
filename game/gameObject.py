@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from game.constants import GameConstants
 
 
@@ -11,7 +12,8 @@ class Game(object):
         self.player2_game_field = []
 
     def remove_dead(self):
-        """Удаляет все карты у которых is_alive==False с игрового поля
+        """
+        Удаляет все карты у которых is_alive==False с игрового поля
         """
         #player 1
         for i, el in enumerate(self.player1_game_field):
